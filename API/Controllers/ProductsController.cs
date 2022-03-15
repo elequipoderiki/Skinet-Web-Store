@@ -2,6 +2,7 @@ using System.Collections.Generic;
 using System.Threading.Tasks;
 using API.Dtos;
 using API.Errors;
+using API.Helpers;
 using AutoMapper;
 using Core.Entities;
 using Core.Interfaces;
@@ -25,12 +26,21 @@ namespace API.Controllers
             _productsRepo = productsRepo;
         }
 
+        //get request does not have body for passing query data objects so it is
+        //required add fromquery attribute for passing query data objects
+        // by means of query string 
         [HttpGet]
-        public async Task<ActionResult<List<ProductToReturnDto>>>  GetProducts()
+        public async Task<ActionResult<Pagination<ProductToReturnDto>>>  GetProducts([FromQuery] ProductSpecParams productParams)
         {
-            var spec = new ProductsWithTypesAndBrandsSpecification();
+            var spec = new ProductsWithTypesAndBrandsSpecification(productParams);
+            var countSpec = new ProductWithFiltersForCountSpecification(productParams);
+            var totalItems = await _productsRepo.CountAsync(countSpec);
+            
+            //get list of products filtered by spec
             var products = await _productsRepo.ListAsync(spec);
-            return Ok(_mapper.Map<IReadOnlyList<Product>, IReadOnlyList<ProductToReturnDto>>(products));
+            
+            var data = _mapper.Map<IReadOnlyList<Product>, IReadOnlyList<ProductToReturnDto>>(products); 
+            return Ok(new Pagination<ProductToReturnDto>(productParams.PageIndex, productParams.PageSize, totalItems, data)); 
         }
 
         [HttpGet("{id}")]
