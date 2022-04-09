@@ -67,6 +67,8 @@ namespace API
 
             app.UseEndpoints(endpoints =>
             {
+                //register endpoints only by controller name and http verb
+                //allowing aditional routing names 
                 endpoints.MapControllers();
             });
         }
