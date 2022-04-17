@@ -8,30 +8,40 @@ import { OrderTotalsComponent } from './components/order-totals/order-totals.com
 import { ReactiveFormsModule } from '@angular/forms';
 import {BsDropdownModule} from 'ngx-bootstrap/dropdown';
 import { TextInputComponent } from './components/text-input/text-input.component';
-
+import { SteeperComponent } from './components/steeper/steeper.component';
+import {CdkStepperModule} from '@angular/cdk/stepper';
+import { BasketSummaryComponent } from './components/basket-summary/basket-summary.component';
+import { RouterModule } from '@angular/router';
 @NgModule({
   declarations: [
+    OrderTotalsComponent,
     PagingHeaderComponent,
     PagerComponent,
-    OrderTotalsComponent,
-    TextInputComponent
+    SteeperComponent,
+    TextInputComponent,
+    BasketSummaryComponent,
   ],
   imports: [
+    BsDropdownModule.forRoot(),
+    CdkStepperModule,    
     CommonModule,
     PaginationModule.forRoot(),
-    BsDropdownModule.forRoot(),
-    ReactiveFormsModule    
+    ReactiveFormsModule,
+    RouterModule
   ],
 
   exports: [
+    BasketSummaryComponent,
+    BsDropdownModule,
+    CarouselModule,
+    CdkStepperModule,    
+    OrderTotalsComponent,
+    PagerComponent,
     PaginationModule,
     PagingHeaderComponent,
-    PagerComponent,
-    CarouselModule,
-    OrderTotalsComponent,
     ReactiveFormsModule ,
-    BsDropdownModule,
-    TextInputComponent   
+    SteeperComponent,
+    TextInputComponent,   
   ]
 })
 export class SharedModule { }
