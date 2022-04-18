@@ -3,7 +3,8 @@
         <li class="nav-item"
             *ngFor="let step of steps; let i = index"
         >
-            <button class="nav-link py-3 text-uppercase font-weight-bold btn-block"
+            <button class="nav-link text-uppercase font-weight-bold btn-block"
+                style="padding: 1.20em;"
                 [class.active]="selectedIndex === i"
                 (click)="onClick(i)"
             >
