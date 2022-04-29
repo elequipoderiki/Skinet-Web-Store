@@ -67,6 +67,7 @@
     </button>
     <button class="btn btn-primary"
         cdkStepperNext
+        [disabled]="checkoutForm.get('addressForm')?.invalid"
     >
         Go to delivery <i class="fa fa-angle-right"></i> 
     </button>

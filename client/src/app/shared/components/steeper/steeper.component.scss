@@ -18,5 +18,9 @@ button.nav-link {
     &.active:focus {
         outline: none;
     }
+
+    &:disabled:not(.active){
+        color: #333;
+    }
 }
 

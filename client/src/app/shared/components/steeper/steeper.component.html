@@ -7,8 +7,9 @@
                 style="padding: 1.20em;"
                 [class.active]="selectedIndex === i"
                 (click)="onClick(i)"
+                [disabled]="true"
             >
-                {{step.label}}:{{step.completed}}
+                {{step.label}}
             </button>
         </li>
     </ul>
