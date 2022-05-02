@@ -4,3 +4,5 @@ appsettings.json
 *.db
 .vscode/*
 *.rdb
+publish
+wwwroot
